@@ -1,0 +1,10 @@
+optuna
+gymnasium
+flappy-bird-gymnasium
+stable-baselines3
+pandas
+numpy
+matplotlib
+torch
+pygame
+Pillow  
