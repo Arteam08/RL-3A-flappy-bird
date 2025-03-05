@@ -9,3 +9,4 @@ torch
 pygame
 Pillow  
 tensorboard
+seaborn
