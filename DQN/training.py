@@ -1,6 +1,7 @@
 import numpy as np
 from collections import namedtuple, deque
 import gymnasium as gym
+import flappy_bird_gymnasium
 import torch
 from torch import randint
 import time

@@ -1,5 +1,6 @@
 import numpy as np
 import gymnasium as gym
+import flappy_bird_gymnasium
 import torch
 import model
 import pygame
