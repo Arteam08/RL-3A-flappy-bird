@@ -1,30 +1,13 @@
-import math
-import random
 import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
 from collections import namedtuple, deque
-from itertools import count
-from PIL import Image
-import flappy_bird_gymnasium
-import gymnasium
+import gymnasium as gym
 import torch
-import torch.nn as nn
-import torch.optim as optim
-import torch.nn.functional as F
 from torch import randint
 import time
 import os
 import model
 #Environment
-env = gymnasium.make("FlappyBird-v0")
-
-# set up matplotlib
-is_ipython = 'inline' in matplotlib.get_backend()
-if is_ipython:
-    from IPython import display
-
-plt.ion()
+env = gym.make("FlappyBird-v0",use_lidar = False)
 
 # if gpu is to be used
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -45,7 +28,7 @@ checkpoint_path = "checkpoints/model_checkpoint"
 checkpoint_dir = "checkpoints"
 os.makedirs(checkpoint_dir, exist_ok=True)  
 
-def DQN(n_episodes=100000, eps_start=0.9, eps_end=0.01, eps_decay=0.995):
+def DQN(n_episodes=10000, eps_start=0.9, eps_end=0.01, eps_decay=0.995):
     """
     Deep Q-Learning Training
     """

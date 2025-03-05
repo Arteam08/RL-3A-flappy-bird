@@ -1,34 +1,13 @@
-import math
-import random
 import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
-from collections import namedtuple, deque
-from itertools import count
-from PIL import Image
-import flappy_bird_gymnasium
-import gymnasium
+import gymnasium as gym
 import torch
-import torch.nn as nn
-import torch.optim as optim
-import torch.nn.functional as F
-from torch import randint
-import time
-import os
 import model
 import pygame
 pygame.quit()  
 pygame.init()  
 
 #Environment
-env = gymnasium.make("FlappyBird-v0", render_mode="human")
-
-# set up matplotlib
-is_ipython = 'inline' in matplotlib.get_backend()
-if is_ipython:
-    from IPython import display
-
-plt.ion()
+env = gym.make("FlappyBird-v0", use_lidar = False)
 
 # if gpu is to be used
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -36,7 +15,7 @@ print(device)
 
 agent = model.Agent(state_size=env.observation_space.shape[0], action_size=env.action_space.n, seed=0)
 
-saved_model="model_checkpoint_50000_3.85.pth" # Load your best model here
+saved_model="model_checkpoint_best_26.88.pth" # Load your best model here
 agent.qnetwork_target.load_state_dict(torch.load(saved_model))
 # Load Model
 agent.qnetwork_local.load_state_dict(torch.load(saved_model))
@@ -67,7 +46,7 @@ for i in range(num_time_steps):
 
 
     print(f"Episode {i+1}: Total Reward = {total_reward}")
-    print("Pipes passed"+ pipe["score"])
+    print("Pipes passed"+ str(pipe["score"]))
     
 
 env.close()  
